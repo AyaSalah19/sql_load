@@ -1,0 +1,20 @@
+SELECT
+    job_title_short,
+    job_via,
+    job_location,
+    job_posted_date::date as date,
+    salary_year_avg
+FROM
+    (select*
+    from january_jobs
+    UNION ALL
+    select*
+    from february_jobs
+    UNION ALL
+    select*
+    from march_jobs
+    ) as q1_job_postings
+WHERE 
+    salary_year_avg > 70000 AND 
+    job_title_short ='Data Analyst'
+order by salary_year_avg DESC
